@@ -41,9 +41,7 @@ export function getLeaderboard() {
 export function addResult(entry) {
   const current = readRaw();
   current.push(entry);
-
   const updated = current.sort(compareEntries).slice(0, MAX_ENTRIES);
-
   writeRaw(updated);
   return updated;
 }
@@ -55,4 +53,10 @@ export function formatDate(isoDate) {
   return `${day}.${month}.${year}`;
 }
 
-export function buildLeaderboardTable(entries) {}
+export function todayIsoDate() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
